@@ -35,6 +35,9 @@ dependencies:
   pinia-plugin-persist:
     specifier: ^1.0.0
     version: 1.0.0(pinia@2.1.7)(vue@3.3.10)
+  pinia-plugin-persistedstate:
+    specifier: ^3.2.0
+    version: 3.2.0(pinia@2.1.7)
   radix-vue:
     specifier: ^1.2.4
     version: 1.2.4(vue@3.3.10)
@@ -8782,6 +8785,14 @@ packages:
       pinia: 2.1.7(typescript@5.3.2)(vue@3.3.10)
       vue: 3.3.10(typescript@5.3.2)
       vue-demi: 0.12.5(vue@3.3.10)
+    dev: false
+
+  /pinia-plugin-persistedstate@3.2.0(pinia@2.1.7):
+    resolution: {integrity: sha512-tZbNGf2vjAQcIm7alK40sE51Qu/m9oWr+rEgNm/2AWr1huFxj72CjvpQcIQzMknDBJEkQznCLAGtJTIcLKrKdw==}
+    peerDependencies:
+      pinia: ^2.0.0
+    dependencies:
+      pinia: 2.1.7(typescript@5.3.2)(vue@3.3.10)
     dev: false
 
   /pinia@2.1.7(typescript@5.3.2)(vue@3.3.10):

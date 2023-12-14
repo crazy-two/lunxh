@@ -19,7 +19,7 @@ const store = useUserStore()
 
 <template>
   <div>
-    <Button :class="store.savedStores.length ? 'fixed right-8 bottom-8' : ''" variant="outline" size="icon" @click="go">
+    <Button :class="store.savedStores.length ? 'fixed top-8 left-8 z-36' : ''" variant="outline" size="icon" @click="go">
       <ChevronRight class="h-4 w-4" />
     </Button>
 

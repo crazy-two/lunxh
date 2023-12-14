@@ -18,6 +18,8 @@ export const useUserStore = defineStore('user', () => {
     savedStores,
     newStore,
   }
+}, {
+  persist: true,
 })
 
 if (import.meta.hot)
