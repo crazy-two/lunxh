@@ -1,56 +1,61 @@
 <script setup lang="ts">
+import { ChevronRight } from 'lucide-vue-next'
+import { Button } from '~/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card'
+import { Input } from '~/components/ui/input'
+import { Label } from '~/components/ui/label'
+
 defineOptions({
   name: 'IndexPage',
 })
-const user = useUserStore()
-const name = ref(user.savedName)
 
 const router = useRouter()
 function go() {
-  if (name.value)
-    router.push(`/hi/${encodeURIComponent(name.value)}`)
+  router.push(`/new`)
 }
 
-const { t } = useI18n()
+const store = useUserStore()
 </script>
 
 <template>
   <div>
-    <div text-4xl>
-      <div i-carbon-campsite inline-block />
-    </div>
-    <p>
-      <a rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank">
-        Vitesse
-      </a>
-    </p>
-    <p>
-      <em text-sm opacity-75>{{ t('intro.desc') }}</em>
-    </p>
+    <Button :class="store.savedStores.length ? 'fixed right-8 bottom-8' : ''" variant="outline" size="icon" @click="go">
+      <ChevronRight class="h-4 w-4" />
+    </Button>
 
-    <div py-4 />
-
-    <TheInput
-      v-model="name"
-      :placeholder="t('intro.whats-your-name')"
-      autocomplete="false"
-      @keydown.enter="go"
-    />
-    <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
-
-    <div>
-      <button
-        m-3 text-sm btn
-        :disabled="!name"
-        @click="go"
-      >
-        {{ t('button.go') }}
-      </button>
+    <div v-if="store.savedStores.length" class="mx-auto w-screen">
+      <div class="h-screen snap-y snap-mandatory overflow-auto">
+        <div
+          v-for="(item, index) in store.savedStores.toSorted(() => Math.random() > 0.5 ? 1 : -1)"
+          :key="index" class="box-border h-[100vh] flex snap-center items-center justify-center p-4"
+        >
+          <Card
+            class="min-h-[80vh] w-[350px] shadow-[10px_10px_0_0_black]"
+          >
+            <CardHeader>
+              <CardTitle>{{ item.name }}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div
+                v-for="(food, index) in item.foods" :key="index"
+                class="grid grid-cols-[25px_1fr] mb-4 items-start pb-4 last:mb-0 last:pb-0"
+              >
+                <span class="h-2 w-2 flex translate-y-1 rounded-full bg-sky-500" />
+                <div class="space-y-1">
+                  <p class="text-left text-sm font-medium leading-none">
+                    {{ food }}
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
-<route lang="yaml">
+<!-- <route lang="yaml">
 meta:
   layout: home
-</route>
+</route> -->
